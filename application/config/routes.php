@@ -53,4 +53,6 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['admin'] = 'Admin/DashboardController/index';
+$route['admin'] = 'Admin/AdminDashboardController/index';
+
+$route['admin/products'] = 'Admin/Products/AdminProductsController/index';

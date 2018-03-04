@@ -186,7 +186,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/libs/animsition/js/animsition.min.js') ?>"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="<?php echo base_url('assets/libs/bootstrap/js/popper.min.js') ?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/libs/select2/select2.min.js') ?>"></script>
+
 
 
 <!--===============================================================================================-->
@@ -194,13 +194,13 @@
 
 <!--===============================================================================================-->
 <script type="text/javascript" src="<?php echo base_url('assets/libs/slick/slick.min.js') ?>"></script>
-<script type="text/javascript" src="js/slick-custom.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/slick-custom.min.js')?>"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/libs/countdowntime/countdowntime.js') ?>"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/libs/lightbox2/js/lightbox.min.js') ?>"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="vendor/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="<?php echo 'assets/libs/sweetalert/sweetalert.min.js' ?>"></script>
 <script type="text/javascript">
     $('.block2-btn-addcart').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
@@ -216,8 +216,12 @@
         });
     });
 </script>
-
-<!--===============================================================================================-->
+<script type="text/javascript">
+    $(".selection-1").select2({
+        minimumResultsForSearch: 20,
+        dropdownParent: $('#dropDownSelect1')
+    });
+</script>
 <script src="<?php echo base_url('assets/js/main.min.js') ?>"></script>
 </body>
 </html>

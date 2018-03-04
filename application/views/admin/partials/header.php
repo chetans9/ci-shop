@@ -125,7 +125,19 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url('index.php/admin/products'); ?>"><i class="fa fa-circle-o"></i> All</a></li>
-                        <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Add</a></li>
+                        <li><a href="<?php echo base_url('index.php/admin/products/create'); ?>"><i class="fa fa-circle-o"></i> Add</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-shopping-bag"></i>
+                        <span>Categories</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo base_url('index.php/admin/categories'); ?>"><i class="fa fa-circle-o"></i> All</a></li>
+                        <li><a href="<?php echo base_url('index.php/admin/categories/create'); ?>"><i class="fa fa-circle-o"></i> Add</a></li>
                     </ul>
                 </li>
             </ul>

@@ -19,4 +19,16 @@ class ProductImagesModel extends MY_Model {
 
     }
 
+    public function getFirstImageByProductId($product_id)
+    {
+        $this->db->select('*');
+
+        $this->db->from($this->_table);
+
+        $this->db->where('product_id',$product_id);
+        $result = $this->db->where('product_id',$product_id)->get();
+
+        return $result->row();
+    }
+
 }

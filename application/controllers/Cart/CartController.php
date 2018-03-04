@@ -7,37 +7,42 @@ class CartController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('ProductsModel');
+        $this->load->model('ProductImagesModel');
     }
 
     /**
-     * Display the list of Products.
-     *
-     *
+     * Add product to cart.
      */
 	public function addToCart()
 	{
 	    $product_id = $this->input->post('id');
+
 	    $product = $this->ProductsModel->get($product_id);
         $qty = 1;
 	    if($this->input->post('qty'))
 	    {
             $qty = $this->input->post('qty');
         }
-
-
-
+        $product_display_img ="";
+        $image = $this->ProductImagesModel->getFirstImageByProductId($product->id);
+	    if($image){
+            $product_display_img = $image->path;
+        }
         $data = array(
             'id'      => $product->id,
             'qty'     => $qty,
             'price'   => $product->price,
             'name'    => $product->name,
-            'options' => array()
+            'options' => array('product_image'=> $product_display_img)
         );
 
         $status = $this->cart->insert($data);
         if($status)
         {
             $this->session->set_flashdata('success', 'Product added to cart successfully');
+        }
+        else{
+            $this->session->set_flashdata('error', 'Failed to add product to cart');
         }
 
 
@@ -46,13 +51,12 @@ class CartController extends CI_Controller {
 
 	}
 
-
+    /**
+     * Update cart
+     */
 	public function updateCart()
     {
         $input_cart = $product_id = $this->input->post('cart');
-
-
-
         $status = $this->cart->update($input_cart);
 
         if($status)
@@ -66,10 +70,7 @@ class CartController extends CI_Controller {
         exit;
     }
 
-	public function getImagesByProductId($id)
-    {
-        return $this->ProductsModel->getImagesByProductId($id);
-    }
+
 
 
     /**
@@ -81,6 +82,8 @@ class CartController extends CI_Controller {
     {
 
         $data['cart'] = $this->cart->contents();
+
+
 
         $this->load->template('cart/cart',$data);
     }

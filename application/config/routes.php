@@ -54,25 +54,29 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 
-/**
- * Products
- */
+//===============Auth=================//
+$route['login'] = 'Auth/LoginController/showLoginForm';
 
-$route['products'] = 'Products/ProductsController';
-$route['products/(:num)'] = 'Products/ProductsController/show/$1';
+//===============Shop=================//
+$route['shop'] = 'Shop/ShopController';
+
+$route['shop/(:any)'] = 'Shop/ShopController/index/$1';// $1 is category
+
+//===============Product=================//
+$route['product/(:num)'] = 'Product/ProductController/show/$1';
 
 
-/**
- * Cart
- */
+//===============Cart=====================//
 
 $route['cart'] = 'Cart/CartController/show';
 $route['add-to-cart'] = 'Cart/CartController/addToCart';
 $route['cart/update'] = 'Cart/CartController/updateCart';
 
 
+//================Check out ==============//
 
-
+$route['cart/checkout'] = 'CheckOut/CheckoutController';
+$route['place-order']['POST'] = 'CheckOut/CheckoutController/placeOrder';
 
 
 /*
@@ -86,3 +90,9 @@ $route['admin/products'] = 'Admin/Products/AdminProductsController/index';
 $route['admin/products/store'] = 'Admin/Products/AdminProductsController/store';
 $route['admin/products/create'] = 'Admin/Products/AdminProductsController/create';
 $route['admin/products/edit/(:num)'] = 'Admin/Products/AdminProductsController/edit/$1';
+$route['admin/products/delete/(:num)'] = 'Admin/Products/AdminProductsController/delete/$1';
+
+$route['admin/categories'] = 'Admin/Categories/AdminCategoriesController/index';
+$route['admin/categories/store'] = 'Admin/Categories/AdminCategoriesController/store';
+$route['admin/categories/create'] = 'Admin/Categories/AdminCategoriesController/create';
+$route['admin/categories/edit/(:num)'] = 'Admin/Categories/AdminCategoriesController/edit/$1';

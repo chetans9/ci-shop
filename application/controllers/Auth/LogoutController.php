@@ -9,7 +9,7 @@ class LogoutController extends CI_Controller {
     {
         parent::__construct();
         if(!$this->session->logged_in){
-            redirect(base_url('index.php/admin'));
+            redirect(base_url('index.php/login'));
         }
     }
 

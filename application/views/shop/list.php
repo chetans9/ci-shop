@@ -91,7 +91,7 @@
 							</div>
 						</div>
 						<span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
+							<?php echo "Showing 1-9 of ".$total_rows; ?> results
 						</span>
 					</div>
 					<!-- Products -->
@@ -180,33 +180,26 @@
         });
     </script>
 
-	<script type="text/javascript">
-		$('.block2-btn-addcart').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-
-		$('.block2-btn-addwishlist').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-			});
-		});
-	</script>
-
 <!--===============================================================================================-->
 	<script type="text/javascript" src="<?php echo base_url('assets/libs/noui/nouislider.min.js')?>"></script>
 	<script type="text/javascript">
 		/*[ No ui ]
 	    ===========================================================*/
 	    var filterBar = document.getElementById('filter-bar');
+        var noui_initial_min =  0;
+        var noui_initial_max = 1000000;
 
-
+        var min_price_selected = document.getElementById('min_price').value;
+        var max_price_selected = document.getElementById('max_price').value;
+        if(min_price_selected){
+            noui_initial_min = min_price_selected;
+        }
+        if(max_price_selected){
+            noui_initial_max = max_price_selected;
+        }
 
 	    noUiSlider.create(filterBar, {
-	        start: [50,100000],
+	        start: [noui_initial_min,noui_initial_max],
 	        connect: true,
 	        range: {
 	            'min': 50,

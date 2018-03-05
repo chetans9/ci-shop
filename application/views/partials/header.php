@@ -47,13 +47,12 @@
 
             <div class="topbar-child2">
 					<span class="topbar-email">
-						fashe@example.com
+						y@example.com
 					</span>
 
                 <div class="topbar-language rs1-select2">
                     <select class="selection-1" name="time">
-                        <option>USD</option>
-                        <option>EUR</option>
+                        <option>INR</option>
                     </select>
                 </div>
             </div>
@@ -61,10 +60,9 @@
 
         <div class="wrap_header">
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="<?php echo base_url() ?>" class="logo">
                 <img src="<?php echo base_url('images/icons/logo.png')?>" alt="IMG-LOGO">
             </a>
-
             <!-- Menu -->
             <div class="wrap_menu">
                 <nav class="menu">
@@ -72,28 +70,22 @@
                         <li>
                             <a href="<?php echo base_url('/') ?>">Home</a>
                         </li>
-
                         <li>
                             <a href="<?php echo base_url('index.php/shop') ?>">Shop</a>
                         </li>
-
                         <li>
                             <a href="about.html">About</a>
                         </li>
-
-
                     </ul>
                 </nav>
             </div>
 
             <!-- Header Icon -->
             <div class="header-icons">
-
                 <span class="linedivide1"></span>
-
                 <div class="header-wrapicon2">
                     <img src="<?php echo base_url('images/icons/icon-header-02.png') ?>" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"><?php echo $this->cart->total_items() ?></span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
@@ -131,7 +123,7 @@
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="<?php echo base_url('index.php/cart/checkout') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     Check Out
                                 </a>
                             </div>
@@ -161,7 +153,7 @@
 
                 <div class="header-wrapicon2">
                     <img src="<?php echo base_url('images/icons/icon-header-02.png') ?>" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                    <span class="header-icons-noti">0</span>
+                    <span class="header-icons-noti"><?php echo $this->cart->total_items() ?></span>
 
                     <!-- Header cart noti -->
                     <div class="header-cart header-dropdown">
@@ -234,8 +226,7 @@
 
                         <div class="topbar-language rs1-select2">
                             <select class="selection-1" name="time">
-                                <option>USD</option>
-                                <option>EUR</option>
+                                <option>INR</option>
                             </select>
                         </div>
                     </div>

@@ -63,14 +63,13 @@ class CartController extends CI_Controller {
         {
             $this->session->set_flashdata('success', 'Cart updated successfully');
         }
-
-
-
         redirect($_SERVER['HTTP_REFERER']);
         exit;
     }
 
+    public function removeItem($row_id){
 
+    }
 
 
     /**

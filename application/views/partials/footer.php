@@ -200,7 +200,7 @@
 <!--===============================================================================================-->
 <script type="text/javascript" src="<?php echo base_url('assets/libs/lightbox2/js/lightbox.min.js') ?>"></script>
 <!--===============================================================================================-->
-<script type="text/javascript" src="<?php echo 'assets/libs/sweetalert/sweetalert.min.js' ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/libs/sweetalert/sweetalert.min.js') ?>"></script>
 <script type="text/javascript">
     $('.block2-btn-addcart').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();

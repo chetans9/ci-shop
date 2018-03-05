@@ -33,9 +33,9 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini">CISA</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>CI Shop Admin</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -51,33 +51,16 @@
                     <?php if($this->session->logged_in) :?>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <?php echo $this->session->user->name ;?>
                             <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-<!--                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
-
                                 <p>
                                     <?php echo $this->session->user->name ?>
                                     <small>Member since <?php echo $this->session->user->created_at ?></small>
                                 </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
@@ -111,18 +94,12 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active">
-                    <a href="#">
+                <li class="<?php echo ($this->uri->segment(2) == "")? " active": ""; ?>">
+                    <a href="<?php echo base_url('index.php/admin') ?>">
                         <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
-<!--                <li>-->
-<!--                    <a href="pages/widgets.html">-->
-<!--                        <i class="fa fa-shopping-bag"></i> <span>Products</span>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-                <li class="treeview">
+                <li class="treeview<?php echo ($this->uri->segment(2) == "products")? " active": ""; ?>">
                     <a href="#">
                         <i class="fa fa-shopping-bag"></i>
                         <span>Products</span>
@@ -134,9 +111,9 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
+                <li class="treeview <?php echo ($this->uri->segment(2) == "categories")? " active": ""; ?>">
                     <a href="#">
-                        <i class="fa fa-shopping-bag"></i>
+                        <i class="fa fa-list"></i>
                         <span>Categories</span>
                         <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                     </a>
@@ -144,6 +121,12 @@
                         <li><a href="<?php echo base_url('index.php/admin/categories'); ?>"><i class="fa fa-circle-o"></i> All</a></li>
                         <li><a href="<?php echo base_url('index.php/admin/categories/create'); ?>"><i class="fa fa-circle-o"></i> Add</a></li>
                     </ul>
+                </li>
+
+                <li class="<?php echo ($this->uri->segment(2) == "orders")? " active": ""; ?>">
+                    <a href="<?php echo base_url('index.php/admin/orders') ?>">
+                        <i class="fa fa-first-order"></i> <span>Orders</span>
+                    </a>
                 </li>
             </ul>
         </section>

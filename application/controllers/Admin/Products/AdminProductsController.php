@@ -39,8 +39,6 @@ class AdminProductsController extends CI_Controller {
         $this->form_validation->set_rules('category_id','category','trim|required');
         $this->form_validation->set_rules('price','Description','trim|required|max_length[11]');
         $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
-
-
     }
 
     /**
@@ -68,10 +66,11 @@ class AdminProductsController extends CI_Controller {
 
         $files = $_FILES;
         $files_count = count($_FILES['images']['name']);
-        //If edit and N files selected,
-        if($this->uri->segment(3) == 'edit'){
+        //If edit and no files selected, OK.
+        if($this->uri->segment(3) == 'edit' && $files_count ==0 ){
             return true;
         }
+
 
         $allowed_mime_types = array("image/jpeg","image/png","image/jpg");
 
@@ -122,10 +121,7 @@ class AdminProductsController extends CI_Controller {
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
             $inputs = $this->input->post();
-
             $this->setValidationRules();
-
-
 
             if ($this->form_validation->run())
             {

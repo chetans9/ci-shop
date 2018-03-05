@@ -8,6 +8,11 @@ class CheckoutController extends CI_Controller {
         parent::__construct();
         $this->load->model('ProductsModel');
         $this->load->model('ProductImagesModel');
+        if(!$this->session->userdata('logged_in'))
+        {
+            $this->session->set_userdata('redirect_to',base_url('index.php/'.uri_string()));
+            redirect(base_url('index.php/login'));
+        }
     }
     /**
      * Display the list of resource.
@@ -36,7 +41,7 @@ class CheckoutController extends CI_Controller {
 
         $total_amt = $this->cart->total(); //Temperory set to cart total
         $order_data = array(
-            'user_id' => '1',
+            'user_id' => $this->session->userdata('user')->id,//Logged in user id
             'delivery_address' => 'Powai',
             'pincode'=>'4000076',
             'total_amt'=> $this->cart->total()

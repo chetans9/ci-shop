@@ -48,7 +48,7 @@
 				</h4>
 
 				<span class="m-text17">
-					<?php echo $product->price ?>
+					<?php echo "Rs. ".number_format($product->price) ?>
 				</span>
 
 				<p class="s-text8 p-t-10">

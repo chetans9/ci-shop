@@ -43,12 +43,11 @@ class ShopController extends CI_Controller {
      */
 	public function index($category_id = null)
 	{
-	    //Get Categories
-        $data['categories'] = $this->CategoriesModel->get_all();
         //Get Query string Inputs.
         $inputs = $this->input->get();
 
         $pagination_config = $this->getPaginationConfig($category_id,$inputs);
+
         $this->pagination->initialize($pagination_config);
 
         $current_per_page = $this->input->get('per_page') OR 0;
@@ -56,7 +55,9 @@ class ShopController extends CI_Controller {
         $limit = $pagination_config['per_page'];
         $offset = $current_per_page;
 
-
+        //Get Categories
+        $data['categories'] = $this->CategoriesModel->get_all();
+        $data['total_rows'] = $pagination_config['total_rows'];
         $data['products'] = $this->ProductsModel->getProductsForShop($category_id,$inputs,$limit,$offset);
 
        $this->load->template('shop/list',$data);

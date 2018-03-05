@@ -8,7 +8,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li class="active">Orders</li>
         </ol>
     </section>
 
@@ -28,15 +28,17 @@
                                 <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Pincode</th>
+                                    <th>Total Price</th>
                                     <th>Actions</th>
                                 </tr>
                                 <?php foreach ($records as $record) : ?>
                                 <tr>
                                     <td><?php echo $record->id;?></td>
-                                    <td><?php echo $record->name;?></td>
+                                    <td><?php echo $record->pincode;?></td>
+                                    <td><?php echo $record->total_amt;?></td>
                                     <td>
-                                        <a href="<?php echo base_url('index.php/admin/'.$this->uri->segment(2).'/edit/'.$record->id) ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="<?php echo base_url('index.php/admin/'.$this->uri->segment(2).'/show/'.$record->id) ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
                                         <button data-toggle="modal" data-target = "#delete-modal<?php echo $record->id ;?>" class="btn btn-danger btn-sm delete_record"><span class="glyphicon glyphicon-trash"></span></button>
                                     </td>
                                 </tr>

@@ -19,7 +19,7 @@
 					<table class="table-shopping-cart">
 						<tr class="table-head">
 							<th class="column-1"></th>
-							<th class="column-2"></th>
+							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
 							<th class="column-4 p-l-70">Quantity</th>
 							<th class="column-5">Total</th>
@@ -29,7 +29,7 @@
                         foreach ($cart as $item) : ?>
 
 						<tr class="table-row">
-							<td class="column-1">
+							<td class="column-1"">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
 									<img src="<?php echo (isset($item['options']['product_image'])) ? base_url() .$item['options']['product_image']: "";  ?>" alt="IMG-PRODUCT">
 								</div>
@@ -50,7 +50,7 @@
 									</button>
 								</div>
 							</td>
-							<td class="column-5"><?php echo $item['subtotal']; ?></td>
+							<td class="column-5"><?php echo number_format($item['subtotal']); ?></td>
 						</tr>
                         <?php
                             $i++;
@@ -58,6 +58,10 @@
 					</table>
 				</div>
 			</div>
+
+            <?php echo form_open(base_url('index.php/cart/remove-item')) ?>
+            <input type="hidden" name="row_id" value="">
+            <?php echo form_close()?>
 
 
 			<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
@@ -118,5 +122,14 @@
 			</div>
 		</div>
 	</section>
+
+    <script>
+        $(document).ready(function () {
+
+           $('.remove_item').click(function () {
+               alert();
+           });
+        });
+    </script>
 
 

@@ -51,7 +51,7 @@ class AdminCategoriesController extends CI_Controller {
                 $last_id = $this->CategoriesModel->insert($inputs);
                 $this->session->set_flashdata('success', 'Category Created successfully');
 
-                redirect(base_url('index.php/admin/products'));
+                redirect(base_url('index.php/admin/categories'));
                 exit;
             }
         }
@@ -97,7 +97,15 @@ class AdminCategoriesController extends CI_Controller {
     {
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
-            $this->CategoriesModel->delete($id);
+            $status = $this->CategoriesModel->delete($id);
+            if($status){
+                $this->session->set_flashdata('info', 'Category deleted successfully.');
+            }
+            else{
+                $this->session->set_flashdata('error', 'Failed to delete Category.');
+            }
+
+            redirect(redirect($_SERVER['HTTP_REFERER']));
         }
 
     }

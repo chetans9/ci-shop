@@ -23,11 +23,36 @@ class AdminProductsController extends CI_Controller {
     }
 
     /**
+     * Set pagination config
+     */
+    protected function getPaginationConfig(){
+        $config['base_url'] = base_url('index.php/'.uri_string());
+        $config['total_rows'] = count($this->ProductsModel->get_all());
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+        $config['full_tag_open'] = '<ul class="pagination pagination-md pull-left">';
+        $config['full_tag_close'] = '</ul>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a>';
+        $config['cur_tag_close'] = '</li></a>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        return $config;
+
+    }
+    /**
      * Display the list of resource.
      */
 	public function index()
 	{
-       $data['records'] = $this->ProductsModel->order_by('created_at','desc')->get_all();
+	    $this->load->library('pagination');
+	    $pagination_config = $this->getPaginationConfig();
+        $this->pagination->initialize($pagination_config);
+
+       $data['records'] = $this->ProductsModel->order_by('created_at','desc')->limit($pagination_config['per_page'],$this->input->get('per_page'))->get_all();
 
        $this->load->templateAdmin('admin/products/list',$data);
 	}
@@ -55,6 +80,7 @@ class AdminProductsController extends CI_Controller {
 
         return $config;
     }
+
 
 
     /**

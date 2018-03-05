@@ -19,55 +19,64 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <div class="box-title">
-                            <a href="<?php echo base_url('index.php/admin/products/create') ?>" class="btn btn-success"> Add new</a>
+                            <a href="<?php echo base_url('index.php/admin/products/create') ?>" class="btn btn-success">
+                                Add new</a>
                         </div>
                     </div>
-                        <div class="box-body">
-                            <?php $this->load->view('admin/partials/flash') ?>
-                            <table class="table table-bordered">
-                                <tbody>
+                    <div class="box-body">
+                        <?php $this->load->view('admin/partials/flash') ?>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                            <?php foreach ($records as $record) : ?>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                                <?php foreach ($records as $record) : ?>
-                                <tr>
-                                    <td><?php echo $record->id;?></td>
-                                    <td><?php echo $record->name;?></td>
+                                    <td><?php echo $record->id; ?></td>
+                                    <td><?php echo $record->name; ?></td>
                                     <td>
-                                        <a href="<?php echo base_url('index.php/admin/products/edit/'.$record->id) ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
-                                        <button data-toggle="modal" data-target = "#delete-modal<?php echo $record->id ;?>" class="btn btn-danger btn-sm delete_record"><span class="glyphicon glyphicon-trash"></span></button>
+                                        <a href="<?php echo base_url('index.php/admin/products/edit/' . $record->id) ?>"
+                                           class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <button data-toggle="modal"
+                                                data-target="#delete-modal<?php echo $record->id; ?>"
+                                                class="btn btn-danger btn-sm delete_record"><span
+                                                    class="glyphicon glyphicon-trash"></span></button>
                                     </td>
                                 </tr>
 
-<!--                                Delete Modal-->
-                                    <div class="modal modal-warning fade" id="delete-modal<?php echo $record->id ;?>">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Delete</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to delete?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                                    <?php echo form_open(base_url('index.php/'.uri_string().'/delete/'.$record->id)) ?>
-                                                    <button type="submit" class="btn btn-outline">Yes</button>
-                                                    <?php echo form_close() ?>
-                                                </div>
+                                <!--                                Delete Modal-->
+                                <div class="modal modal-warning fade" id="delete-modal<?php echo $record->id; ?>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Delete</h4>
                                             </div>
-                                            <!-- /.modal-content -->
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline pull-left"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                                <?php echo form_open(base_url('index.php/' . uri_string() . '/delete/' . $record->id)) ?>
+                                                <button type="submit" class="btn btn-outline">Yes</button>
+                                                <?php echo form_close() ?>
+                                            </div>
                                         </div>
-                                        <!-- /.modal-dialog -->
+                                        <!-- /.modal-content -->
                                     </div>
-                                <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php echo $this->pagination->create_links(); ?>
+                    </div>
                 </div>
 
             </div>

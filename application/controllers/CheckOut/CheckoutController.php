@@ -26,6 +26,7 @@ class CheckoutController extends CI_Controller {
             exit();
         }
         $data['cart'] = $this->cart->contents();
+
         $this->load->template('checkout/checkout',$data);
     }
 
@@ -40,13 +41,17 @@ class CheckoutController extends CI_Controller {
         $cart_contents = $this->cart->contents();
 
         $total_amt = $this->cart->total(); //Temperory set to cart total
+
+
         $order_data = array(
             'user_id' => $this->session->userdata('user')->id,//Logged in user id
-            'delivery_address' => 'Powai',
-            'pincode'=>'4000076',
-            'total_amt'=> $this->cart->total()
+            'delivery_address' => $this->input->post('delivery_address'),
+            'pincode'=>$this->input->post('pincode'),
+            'total_amt'=> $total_amt
         );
         $order_id = $this->OrdersModel->insert($order_data);
+
+
 
         foreach ($cart_contents as $product){
             $order_product_data = array(

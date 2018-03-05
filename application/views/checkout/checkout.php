@@ -55,6 +55,7 @@
 				<h5 class="m-text20 p-b-24">
 					Order
 				</h5>
+                <?php echo validation_errors(); ?>
 
 				<!--  -->
 				<div class="flex-w flex-sb-m p-b-12">
@@ -66,11 +67,8 @@
 						<?php echo "Rs. ".number_format($this->cart->total())." /-"; ?>
 					</span>
 				</div>
-
-
-
-
 				<!--  -->
+                <?php echo form_open(base_url('index.php/place-order')) ?>
 				<div class="flex-w flex-sb-m p-t-26 p-b-30">
 					<span class="m-text22 w-size19 w-full-sm">
 						Total:
@@ -80,7 +78,27 @@
 						<?php echo "Rs. ".number_format($this->cart->total())." /-"; ?>
 					</span>
 				</div>
-                <?php echo form_open(base_url('index.php/place-order')) ?>
+
+                <div class="flex-w flex-sb-m p-t-26 p-b-30">
+					<span class="m-text22 w-size19 w-full-sm">
+						Delivery Address:
+					</span>
+
+                    <span class="m-text21 w-size20 w-full-sm">
+                         <?php echo form_input('delivery_address',set_value('delivery_address'),array("class"=>"form-control","required"=>"required")) ?>
+					</span>
+                </div>
+
+                <div class="flex-w flex-sb-m p-t-26 p-b-30">
+					<span class="m-text22 w-size19 w-full-sm">
+						Pincode :
+					</span>
+
+                    <span class="m-text21 w-size20 w-full-sm">
+                         <?php echo form_input('pincode',set_value('pincode'),array("class"=>"form-control","required"=>"required")) ?>
+					</span>
+                </div>
+
 				<div class="size15 trans-0-4">
 					<!-- Button -->
 					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
@@ -90,7 +108,7 @@
                 <?php echo form_close() ?>
             </div>
 			</div>
-		</div>
+
 	</section>
 
 

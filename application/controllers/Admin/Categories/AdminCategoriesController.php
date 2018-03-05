@@ -2,10 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminCategoriesController extends CI_Controller {
-
+    /**
+     * AdminCategoriesController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->logged_in){
+            redirect(base_url('index.php/login'));
+            exit;
+        }
 
         $this->load->model('ProductsModel');
         $this->load->model('CategoriesModel');
@@ -14,12 +20,10 @@ class AdminCategoriesController extends CI_Controller {
 
     /**
      * Display the list of resource.
-     *
-     *
      */
 	public function index()
 	{
-       $data['records'] = $this->CategoriesModel->get_all();
+       $data['records'] = $this->CategoriesModel->order_by('created_at','desc')->get_all();
 
        $this->load->templateAdmin('admin/categories/list',$data);
 	}
@@ -31,14 +35,7 @@ class AdminCategoriesController extends CI_Controller {
     {
         $data = array();
 
-
-
         $data['categories'] = $this->CategoriesModel->getCategoriesDropdown();
-
-
-
-
-
         //If POST method Create New Record
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
@@ -83,7 +80,7 @@ class AdminCategoriesController extends CI_Controller {
                 $this->CategoriesModel->update($id, $inputs);
                 $this->session->set_flashdata('success', 'Product Updated successfully');
 
-                redirect(base_url('index.php/admin/products'));
+                redirect(base_url('index.php/admin/categories'));
                 exit;
             }
         }
@@ -103,14 +100,5 @@ class AdminCategoriesController extends CI_Controller {
             $this->CategoriesModel->delete($id);
         }
 
-    }
-
-    public function getUploadConfig()
-    {
-        $config['upload_path']          = 'uploads/images';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 2000;
-
-        return $config;
     }
 }

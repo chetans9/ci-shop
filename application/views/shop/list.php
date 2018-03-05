@@ -2,12 +2,12 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/libs/noui/nouislider.min.css">
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(<?php echo base_url('images/heading-pages-02.jpg') ?>">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(<?php echo base_url('assets/images/header/shop.jpg') ?>">
 		<h2 class="l-text2 t-center">
-			Women
+			SHOP
 		</h2>
 		<p class="m-text13 t-center">
-			New Arrivals Women Collection 2018
+
 		</p>
 	</section>
 
@@ -19,9 +19,6 @@
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
 
-
-                    <!--                <input type="text" name ="search_str" value="--><?php //echo $this->input->get('search_str') ?><!--">-->
-
 					<div class="leftbar p-r-20 p-r-0-sm">
 						<!--  -->
 						<h4 class="m-text14 p-b-7">
@@ -31,7 +28,7 @@
 						<ul class="p-b-54">
 
 							<li class="p-t-4">
-								<a href="#" class="s-text13 <?php echo ($this->uri->segment(2) == "") ? 'active1':''; ?>">
+								<a href="<?php echo base_url('index.php/shop/') ?>" class="s-text13 <?php echo ($this->uri->segment(2) == "") ? 'active1':''; ?>">
 									All
 								</a>
 							</li>
@@ -100,7 +97,9 @@
 					<!-- Products -->
 					<div class="row">
                         <?php $this->load->view('partials/flash'); ?>
-                        <?php foreach ($products as $product) : ?>
+                        <?php
+                        $product_count = 1;
+                        foreach ($products as $product) : ?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 							<!-- Block2 -->
 							<div class="block2">
@@ -135,7 +134,12 @@
 								</div>
 							</div>
 						</div>
-                        <?php endforeach; ?>
+                        <?php if($product_count%3 == 0) : ?>
+                            <div class="clearfix"></div>
+                        <?php endif; ?>
+                        <?php
+                            $product_count ++;
+                        endforeach; ?>
 					</div>
 
 					<!-- Pagination -->

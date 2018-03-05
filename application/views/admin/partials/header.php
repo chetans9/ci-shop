@@ -48,10 +48,11 @@
                 <ul class="nav navbar-nav">
 
                     <!-- User Account: style can be found in dropdown.less -->
+                    <?php if($this->session->logged_in) :?>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -59,8 +60,8 @@
 <!--                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    <?php echo $this->session->user->name ?>
+                                    <small>Member since <?php echo $this->session->user->created_at ?></small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -84,11 +85,15 @@
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <?php echo form_open(base_url('index.php/logout')) ?>
+                                    <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                    <?php echo form_close() ?>
+<!--                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>-->
                                 </div>
                             </li>
                         </ul>
                     </li>
+                    <?php endif; ?>
                     <!-- Control Sidebar Toggle Button -->
                     <li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>

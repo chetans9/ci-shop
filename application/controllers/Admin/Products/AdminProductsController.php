@@ -11,6 +11,10 @@ class AdminProductsController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        if(!$this->session->logged_in){
+            redirect(base_url('index.php/login'));
+            exit;
+        }
 
         $this->load->model('ProductsModel');
         $this->load->model('ProductImagesModel');
@@ -23,10 +27,21 @@ class AdminProductsController extends CI_Controller {
      */
 	public function index()
 	{
-       $data['records'] = $this->ProductsModel->get_all();
+       $data['records'] = $this->ProductsModel->order_by('created_at','desc')->get_all();
 
        $this->load->templateAdmin('admin/products/list',$data);
 	}
+
+	protected function setValidationRules()
+    {
+        $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
+        $this->form_validation->set_rules('description','Description','trim|required');
+        $this->form_validation->set_rules('category_id','category','trim|required');
+        $this->form_validation->set_rules('price','Description','trim|required|max_length[11]');
+        $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
+
+
+    }
 
     /**
      * Get Image/File Upload configuration.
@@ -51,10 +66,14 @@ class AdminProductsController extends CI_Controller {
      */
     public function checkAndUploadFiles(){
 
-        $allowed_mime_types = array("image/jpeg","image/png","image/jpg");
-
         $files = $_FILES;
         $files_count = count($_FILES['images']['name']);
+        //If edit and N files selected,
+        if($this->uri->segment(3) == 'edit'){
+            return true;
+        }
+
+        $allowed_mime_types = array("image/jpeg","image/png","image/jpg");
 
         $upload_config = $this->getUploadConfig();
         $this->load->library('upload', $upload_config);
@@ -82,7 +101,10 @@ class AdminProductsController extends CI_Controller {
                 return false;
             }
 
-            $this->upload->do_upload('images');
+            if(!$this->upload->do_upload('images')){
+                $this->form_validation->set_message('checkAndUploadFiles', $this->upload->display_errors());
+                return false;
+            }
             array_push($this->uploaded_images,$this->upload->data());
         }
         return true;
@@ -95,16 +117,15 @@ class AdminProductsController extends CI_Controller {
     {
         $data = array();
 
+
         //If POST method Create New Record
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
             $inputs = $this->input->post();
-            //print_r($inputs);
-            $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('description','Description','trim|required');
-            $this->form_validation->set_rules('category_id','category','trim|required');
-            $this->form_validation->set_rules('price','Description','trim|required|max_length[11]');
-            $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
+
+            $this->setValidationRules();
+
+
 
             if ($this->form_validation->run())
             {
@@ -142,9 +163,7 @@ class AdminProductsController extends CI_Controller {
 
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
-            $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
-            $this->form_validation->set_rules('description','Description','trim|required|max_length[128]');
-            $this->form_validation->set_rules('price','Description','trim|required|max_length[128]');
+            $this->setValidationRules();
 
             if ($this->form_validation->run())
             {
@@ -152,6 +171,13 @@ class AdminProductsController extends CI_Controller {
                 $inputs = $this->input->post();
                 $this->ProductsModel->update($id, $inputs);
                 $this->session->set_flashdata('success', 'Product Updated successfully');
+
+                foreach ($this->uploaded_images as $uploaded_image)
+                {
+                    $images_path['path'] = 'uploads/images/'.$uploaded_image['file_name'];
+                    $images_path['product_id'] = $id;
+                    $this->ProductImagesModel->insert($images_path);
+                }
 
                 redirect(base_url('index.php/admin/products'));
                 exit;

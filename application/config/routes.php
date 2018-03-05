@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 //===============Auth=================//
 $route['login'] = 'Auth/LoginController/showLoginForm';
+$route['logout']['POST'] = 'Auth/LogoutController/logout';
 
 //===============Shop=================//
 $route['shop'] = 'Shop/ShopController';

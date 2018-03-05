@@ -14,6 +14,12 @@ class CheckoutController extends CI_Controller {
      */
     public function index()
     {
+        //if cart is empty,
+        if(count($this->cart->contents()) == 0){
+            $this->session->set_flashdata('error', 'Please add items  to cart first');
+            redirect(base_url('index.php/shop'));
+            exit();
+        }
         $data['cart'] = $this->cart->contents();
         $this->load->template('checkout/checkout',$data);
     }

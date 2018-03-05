@@ -118,7 +118,7 @@
                         </ul>
 
                         <div class="header-cart-total">
-                            Total: $75.00
+                            Total: Rs. <?php echo number_format($this->cart->total()); ?>
                         </div>
 
                         <div class="header-cart-buttons">
@@ -186,7 +186,7 @@
                         </ul>
 
                         <div class="header-cart-total">
-                            Total: $75.00
+                            Total: Rs <?php echo $this->cart->total(); ?>
                         </div>
 
                         <div class="header-cart-buttons">
@@ -199,7 +199,7 @@
 
                             <div class="header-cart-wrapbtn">
                                 <!-- Button -->
-                                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                <a href="<?php echo base_url('index.php/checkout') ?>" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                     Check Out
                                 </a>
                             </div>

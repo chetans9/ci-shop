@@ -109,9 +109,11 @@
 
 				<div class="size15 trans-0-4">
 					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Proceed to Checkout
-					</button>
+                    <a href="<?php echo base_url('index.php/cart/checkout') ?>">
+                        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+                            Proceed to Checkout
+                        </button>
+                    </a>
 				</div>
 			</div>
 		</div>

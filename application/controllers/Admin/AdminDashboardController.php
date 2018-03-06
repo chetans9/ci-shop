@@ -19,8 +19,12 @@ class AdminDashboardController extends CI_Controller {
      */
 	public function index()
 	{
-	    $this->load->model('ProductsModel');
-	    $data["products_count"] =
-		$this->load->templateAdmin('admin/dashboard',array());
+	    //$data["products_count"] =
+        $this->load->model('OrdersModel');
+        $this->load->model('ProductsModel');
+        $data["new_orders_count"] = $this->OrdersModel->countNew();
+        $data["active_products_count"] = $this->ProductsModel->countActive();
+
+		$this->load->templateAdmin('admin/dashboard',$data);
 	}
 }

@@ -31,4 +31,17 @@
         <input type="file" name="images[]" class="form-control" multiple="multiple"/>
         <?php echo form_error('images[]', '<span class="help-block">', '</span>') ?>
     </div>
+
+    <div class="form-group<?php echo (form_error('active')) ? ' has-error' : ''; ?>">
+        <label>Active * &nbsp  </label>
+
+        <label class="radio-inline">
+        <?php echo form_radio('active',1,(isset($record)) ?  $record->active :true ,array()); ?>Yes
+        </label>
+
+        <label class="radio-inline">
+            <?php echo form_radio('active',0,(isset($record) && $record->active == 0) ?  true : false,array()); ?>No
+        </label>
+        <?php echo form_error('active', '<span class="help-block">', '</span>') ?>
+    </div>
 </fieldset>

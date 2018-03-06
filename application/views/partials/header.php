@@ -93,11 +93,11 @@
                             <?php foreach ($this->cart->contents() as $header_cart) : ?>
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
-                                    <img src="<?php echo (isset($header_cart['options']['product_image'])) ? base_url() .$header_cart['options']['product_image']: "";  ?>" alt="IMG">
+                                    <img src="<?php echo (isset($header_cart['options']['product_image'])) ? base_url() .thumbImage($header_cart['options']['product_image']): "";  ?>" alt="IMG">
                                 </div>
 
                                 <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
+                                    <a href="<?php echo base_url()."index.php/product/".$header_cart['id'] ?>" class="header-cart-item-name">
                                         <?php echo $header_cart['name'] ?>
                                     </a>
 
@@ -161,11 +161,11 @@
                             <?php foreach ($this->cart->contents() as $header_cart) : ?>
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
-                                    <img src="images/item-cart-01.jpg" alt="IMG">
+                                    <img src="<?php echo (isset($header_cart['options']['product_image'])) ? base_url() .thumbImage($header_cart['options']['product_image']): "";  ?>" alt="IMG">
                                 </div>
 
                                 <div class="header-cart-item-txt">
-                                    <a href="#" class="header-cart-item-name">
+                                    <a href="<?php echo base_url()."index.php/product/".$header_cart['id'] ?>" class="header-cart-item-name">
                                         <?php echo $header_cart['name'] ?>
                                     </a>
 

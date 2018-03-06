@@ -32,6 +32,8 @@ class ShopController extends CI_Controller {
         $config['reuse_query_string'] = true;
         $config['full_tag_open'] = '<div class="pagination flex-m flex-w p-t-26">';
         $config['full_tag_close'] = '</div>';
+        $config['cur_tag_open'] = '<a class="item-pagination flex-c-m trans-0-4 active-pagination">';
+        $config['cur_tag_close'] = '</a>';
         $config['attributes'] = array('class' => 'item-pagination flex-c-m trans-0-4');
         return $config;
     }

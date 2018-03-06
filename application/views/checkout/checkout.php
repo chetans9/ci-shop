@@ -84,8 +84,9 @@
 						Delivery Address:
 					</span>
 
-                    <span class="m-text21 w-size20 w-full-sm">
-                         <?php echo form_input('delivery_address',set_value('delivery_address'),array("class"=>"form-control","required"=>"required")) ?>
+                    <span class="m-text21 w-size20 w-full-sm effect1 w-size9">
+                         <?php echo form_input('delivery_address',set_value('delivery_address'),array("required"=>"required")) ?>
+                        <span class="effect1-line"></span>
 					</span>
                 </div>
 
@@ -94,8 +95,9 @@
 						Pincode :
 					</span>
 
-                    <span class="m-text21 w-size20 w-full-sm">
-                         <?php echo form_input('pincode',set_value('pincode'),array("class"=>"form-control","required"=>"required")) ?>
+                    <span class="m-text21 w-size20 w-full-sm effect1 w-size9">
+                         <?php echo form_input('pincode',set_value('pincode'),array("class"=>"s-text7 w-full","required"=>"required")) ?>
+                        <span class="effect1-line"></span>
 					</span>
                 </div>
 

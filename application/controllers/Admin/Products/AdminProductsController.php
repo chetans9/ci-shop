@@ -20,36 +20,20 @@ class AdminProductsController extends CI_Controller {
         $this->load->model('ProductImagesModel');
         $this->load->model('CategoriesModel');
         $this->load->helper('file');
+        //load custom helper
+        $this->load->helper('admin');
     }
 
-    /**
-     * Set pagination config
-     */
-    protected function getPaginationConfig(){
-        $config['base_url'] = base_url('index.php/'.uri_string());
-        $config['total_rows'] = count($this->ProductsModel->get_all());
-        $config['per_page'] = 10;
-        $config['page_query_string'] = TRUE;
-        $config['full_tag_open'] = '<ul class="pagination pagination-md pull-left">';
-        $config['full_tag_close'] = '</ul>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a>';
-        $config['cur_tag_close'] = '</li></a>';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
-        return $config;
 
-    }
+
     /**
      * Display the list of resource.
      */
 	public function index()
 	{
 	    $this->load->library('pagination');
-	    $pagination_config = $this->getPaginationConfig();
+	    //Call user defined helper
+	    $pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(),15);
         $this->pagination->initialize($pagination_config);
 
        $data['records'] = $this->ProductsModel->order_by('created_at','desc')->limit($pagination_config['per_page'],$this->input->get('per_page'))->get_all();
@@ -57,13 +41,15 @@ class AdminProductsController extends CI_Controller {
        $this->load->templateAdmin('admin/products/list',$data);
 	}
 
-	protected function setValidationRules()
+    /**
+     * Set common validation rules for products form.
+     */
+	protected function setValidationRules($type = 'add')
     {
         $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
         $this->form_validation->set_rules('description','Description','trim|required');
         $this->form_validation->set_rules('category_id','category','trim|required');
         $this->form_validation->set_rules('price','Description','trim|required|max_length[11]');
-        $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
     }
 
     /**
@@ -130,8 +116,13 @@ class AdminProductsController extends CI_Controller {
                 $this->form_validation->set_message('checkAndUploadFiles', $this->upload->display_errors());
                 return false;
             }
+
             array_push($this->uploaded_images,$this->upload->data());
+
+
         }
+
+        $this->createUploadedImageThumbs();
         return true;
     }
 
@@ -148,10 +139,13 @@ class AdminProductsController extends CI_Controller {
         {
             $inputs = $this->input->post();
             $this->setValidationRules();
+            //Set one additional rule
+            $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
 
             if ($this->form_validation->run())
             {
                 //Form validation success. Insert Record into database
+                $inputs['created_at'] = date('Y-m-d H:i:s');
                 $last_id = $this->ProductsModel->insert($inputs);
 
                 $images_path = array();
@@ -186,11 +180,16 @@ class AdminProductsController extends CI_Controller {
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
             $this->setValidationRules();
+            //Set one additional rule for files in edit section
+            if(!empty($_FILES['images']['name']) && $_FILES['images']['name'][0]!=null ){
+                $this->form_validation->set_rules('images[]', 'Images', 'callback_checkAndUploadFiles');
+            }
 
             if ($this->form_validation->run())
             {
                 //Form validation success. Update Record
                 $inputs = $this->input->post();
+                $inputs['updated_at'] = date('Y-m-d H:i:s');
                 $this->ProductsModel->update($id, $inputs);
                 $this->session->set_flashdata('success', 'Product Updated successfully');
 
@@ -228,5 +227,20 @@ class AdminProductsController extends CI_Controller {
             exit;
         }
 
+    }
+
+    public function createUploadedImageThumbs(){
+        $config['image_library'] = 'gd2';
+        $config['create_thumb'] = TRUE;
+        $config['maintain_ratio'] = TRUE;
+        $config['width']         = 250;
+        $config['height']       = 250;
+        foreach ($this->uploaded_images as $uploaded_image)
+        {
+            $config['source_image'] = 'uploads/images/'.$uploaded_image['file_name'];
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
+        }
+        return true;
     }
 }

@@ -47,6 +47,7 @@ class CheckoutController extends CI_Controller {
             'user_id' => $this->session->userdata('user')->id,//Logged in user id
             'delivery_address' => $this->input->post('delivery_address'),
             'pincode'=>$this->input->post('pincode'),
+            'order_status' => 'new',
             'total_amt'=> $total_amt
         );
         $order_id = $this->OrdersModel->insert($order_data);

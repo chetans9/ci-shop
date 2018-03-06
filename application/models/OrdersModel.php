@@ -13,4 +13,14 @@ class OrdersModel extends MY_Model {
 
         return $result;
     }
+
+    public function countNew(){
+        $this->db->select("$this->_table.id");
+        $this->db->from($this->_table);
+        $this->db->where("order_status","new");
+        $query = $this->db->get();
+
+        return $query->num_rows();
+
+    }
 }

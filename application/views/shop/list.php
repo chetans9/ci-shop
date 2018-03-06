@@ -108,7 +108,7 @@
                                     <img src="<?php echo base_url(thumbImage($product->path)) ?>" alt="IMG-PRODUCT">
 
 									<div class="block2-overlay trans-0-4">
-										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
+										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4" data-product-id="<?php echo $product->id ?>">
 											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
 											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
 										</a>
@@ -141,12 +141,6 @@
                             $product_count ++;
                         endforeach; ?>
 					</div>
-
-					<!-- Pagination -->
-<!--					<div class="pagination flex-m flex-w p-t-26">-->
-<!--						<a href="#" class="item-pagination flex-c-m trans-0-4 active-pagination">1</a>-->
-<!--						<a href="#" class="item-pagination flex-c-m trans-0-4">2</a>-->
-<!--					</div>-->
                     <?php echo $this->pagination->create_links(); ?>
 				</div>
 

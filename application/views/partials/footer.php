@@ -211,8 +211,27 @@
 
     $('.block2-btn-addwishlist').each(function(){
         var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+
         $(this).on('click', function(){
-            swal(nameProduct, "is added to wishlist !", "success");
+            var product_id = $(this).data("product-id");
+            var Formdata = {
+                product_id : product_id,
+            };
+
+            $.ajax({
+                url : "<?php echo base_url('index.php/add-to-wishlist'); ?>",
+                type : 'post',
+                data : Formdata,
+                success : function (result) {
+                    if(result.status == 1){
+                        swal(nameProduct, "Added to wishlist", "success");
+                    }
+                },
+                error : function (error) {
+                    console.log(error);
+                    swal("", error.responseText, "error");
+                }
+            });
         });
     });
 </script>

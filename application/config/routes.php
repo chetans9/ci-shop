@@ -79,6 +79,13 @@ $route['cart/update'] = 'Cart/CartController/updateCart';
 $route['cart/checkout'] = 'CheckOut/CheckoutController';
 $route['place-order']['POST'] = 'CheckOut/CheckoutController/placeOrder';
 
+//================User Profile ==============//
+$route['profile'] = 'Profile/ProfileController';
+$route['profile/my-orders'] = 'Profile/ProfileController/myOrders';
+$route['profile/my-wishlist'] = 'Profile/ProfileController/myWishList';
+$route['add-to-wishlist'] = 'WishList/WishListController/addToWishList';
+
+
 
 /*
 | -------------------------------------------------------------------------

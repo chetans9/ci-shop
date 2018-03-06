@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/libs/font-awesome/css/font-awesome.min.css') ?>">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/fonts/themify/themify-icons.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/fonts/elegant-font/html-css/style.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/libs/animsition/css/animsition.min.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>assets/libs/slick/slick.css">
 
@@ -42,7 +43,7 @@
             </div>
 
             <span class="topbar-child1">
-					Free shipping for standard order over $100
+					Free shipping for standard order over RS 1000
 				</span>
 
             <div class="topbar-child2">
@@ -61,7 +62,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="<?php echo base_url() ?>" class="logo">
-                <img src="<?php echo base_url('images/icons/logo.png')?>" alt="IMG-LOGO">
+                <img src="<?php echo base_url('images/icons/logo.png')?>" alt="CI_Shop">
             </a>
             <!-- Menu -->
             <div class="wrap_menu">
@@ -82,7 +83,12 @@
 
             <!-- Header Icon -->
             <div class="header-icons">
+                <?php if($this->session->userdata('logged_in')) :?>
+                <a href="<?php echo base_url('index.php/profile') ?>" class="header-wrapicon1 dis-block">
+                    <img src="<?php echo base_url() ?>images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                </a>
                 <span class="linedivide1"></span>
+                <?php endif; ?>
                 <div class="header-wrapicon2">
                     <img src="<?php echo base_url('images/icons/icon-header-02.png') ?>" class="header-icon1 js-show-header-dropdown" alt="ICON">
                     <span class="header-icons-noti"><?php echo $this->cart->total_items() ?></span>
@@ -138,7 +144,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="index.html" class="logo-mobile">
-            <img src="images/icons/logo.png" alt="IMG-LOGO">
+            <img src="<?php echo base_url('images/icons/logo.png')?>" alt="CI_Shop">
         </a>
 
         <!-- Button show menu -->
@@ -146,7 +152,7 @@
             <!-- Header Icon mobile -->
             <div class="header-icons-mobile">
                 <a href="#" class="header-wrapicon1 dis-block">
-                    <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                    <img src="<?php echo base_url() ?>images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                 </a>
 
                 <span class="linedivide2"></span>

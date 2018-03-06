@@ -33,12 +33,10 @@ class AdminProductsController extends CI_Controller {
 	{
 	    $this->load->library('pagination');
 	    //Call user defined helper
-	    $pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(),15);
-        $this->pagination->initialize($pagination_config);
-
-       $data['records'] = $this->ProductsModel->order_by('created_at','desc')->limit($pagination_config['per_page'],$this->input->get('per_page'))->get_all();
-
-       $this->load->templateAdmin('admin/products/list',$data);
+	    $pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(),12);
+	    $this->pagination->initialize($pagination_config);
+        $data['records'] = $this->ProductsModel->order_by('created_at','desc')->limit($pagination_config['per_page'],$this->input->get('per_page'))->get_all();
+        $this->load->templateAdmin('admin/products/list',$data);
 	}
 
     /**

@@ -21,8 +21,9 @@
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
 							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Quantity</th>
+							<th class="column-4">Quantity</th>
 							<th class="column-5">Total</th>
+                            <th class="column-5">Action</th>
 						</tr>
                         <?php
                         $i = 0;
@@ -51,6 +52,7 @@
 								</div>
 							</td>
 							<td class="column-5"><?php echo number_format($item['subtotal']); ?></td>
+                            <td class="column-6"><button type="button" class="btn btn-sm btn-default remove_item" data-row-id="<?php echo $item['rowid'] ?>">X</button></td>
 						</tr>
                         <?php
                             $i++;
@@ -58,10 +60,6 @@
 					</table>
 				</div>
 			</div>
-
-            <?php echo form_open(base_url('index.php/cart/remove-item')) ?>
-            <input type="hidden" name="row_id" value="">
-            <?php echo form_close()?>
 
 
 			<div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm">
@@ -123,11 +121,18 @@
 		</div>
 	</section>
 
-    <script>
-        $(document).ready(function () {
+    <?php echo form_open(base_url('index.php/cart/remove-item','',array("id"=>"remove_item_form"))) ?>
+    <input type="text" name="product_id" id="input_product_id" value="">
+    <?php echo form_close()?>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
            $('.remove_item').click(function () {
-               alert();
+
+               var remove_item = $(this).data("row-id");
+
+               $("#input_product_id").val(remove_item);
+               // $("#remove_item_form").submit();
            });
         });
     </script>

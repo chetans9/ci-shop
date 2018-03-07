@@ -67,8 +67,8 @@ class CartController extends CI_Controller {
         exit;
     }
 
-    public function removeItem($row_id){
-
+    public function removeItem(){
+        $this->input->post("row_id");
     }
 
 

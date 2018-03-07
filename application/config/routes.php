@@ -72,6 +72,7 @@ $route['product/(:num)'] = 'Product/ProductController/show/$1';
 $route['cart'] = 'Cart/CartController/show';
 $route['add-to-cart'] = 'Cart/CartController/addToCart';
 $route['cart/update'] = 'Cart/CartController/updateCart';
+$route['cart/remove']['POST'] = 'Cart/CartController/removeItem';
 
 
 //================Check out ==============//

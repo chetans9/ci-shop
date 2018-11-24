@@ -16,7 +16,8 @@ class ProductsModel extends MY_Model {
 
 
     public function buildQuery($category,$inputs,$limit=null,$offset = 0){
-        $this->db->select('products.*,product_images.id as image_id,product_images.path as path');
+    	
+        $this->db->select('products.*');
 
         $this->db->from($this->_table);
         if($category)
@@ -45,7 +46,7 @@ class ProductsModel extends MY_Model {
             $this->db->order_by('products.price',$inputs['sort_type']);
         }
 
-        $this->db->where('products.active',1);
+        $this->db->where('products.status',1);
         $this->db->join('product_images','products.id = product_images.product_id','left');
         $this->db->group_by('products.id');
 
@@ -64,7 +65,7 @@ class ProductsModel extends MY_Model {
     public function countActive(){
         $this->db->select("$this->_table.id");
         $this->db->from($this->_table);
-        $this->db->where("active","0");
+        $this->db->where("status","0");
         $query = $this->db->get();
 
         return $query->num_rows();

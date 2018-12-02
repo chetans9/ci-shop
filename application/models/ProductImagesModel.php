@@ -2,7 +2,7 @@
 
 class ProductImagesModel extends MY_Model {
 
-    public $_table = 'product_images';
+    public $table = 'product_images';
 
     /**
      *
@@ -19,16 +19,22 @@ class ProductImagesModel extends MY_Model {
 
     }
 
-    public function getFirstImageByProductId($product_id)
-    {
-        $this->db->select('*');
+	public function getImagesForProducts($products)
+	{
+		$result = array();
+		if(empty($products)){
+			return $result;
+		}
 
-        $this->db->from($this->_table);
+		foreach ($products as $product){
+			$product_ids[] = $product->id;
+		}
+		$this->db->select('*');
+		$this->db->from($this->table);
+		$this->db->where_in('product_id',$product_ids);
+		$result = $this->db->get()->result();
 
-        $this->db->where('product_id',$product_id);
-        $result = $this->db->where('product_id',$product_id)->get();
-
-        return $result->row();
-    }
+		return $result;
+	}
 
 }

@@ -32,8 +32,9 @@ class AdminProductsController extends CI_Controller {
 	public function index()
 	{
 	    $this->load->library('pagination');
+
 	    //Call user defined helper
-	    $pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(),12);
+	    $pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(),20);
 	    $this->pagination->initialize($pagination_config);
         $data['records'] = $this->ProductsModel->order_by('created_at','desc')->limit($pagination_config['per_page'],$this->input->get('per_page'))->get_all();
         $this->load->templateAdmin('admin/products/list',$data);
@@ -227,6 +228,9 @@ class AdminProductsController extends CI_Controller {
 
     }
 
+	/**
+	 * @return bool
+	 */
     public function createUploadedImageThumbs(){
         $config['image_library'] = 'gd2';
         $config['create_thumb'] = TRUE;

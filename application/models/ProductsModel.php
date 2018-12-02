@@ -4,9 +4,27 @@ class ProductsModel extends MY_Model {
 
     public $_table = 'products';
 
-    public function getProductsForShop($category,$inputs,$limit,$offset)
+	/**
+	 * ProductsModel constructor.
+	 */
+	public function __construct()
+	{
+		//$this->has_one['image'] = array('foreign_model'=>'ProductsModel','foreign_table'=>'product_images','foreign_key'=>'product_id','local_key'=>'id');
+
+		parent::__construct();
+	}
+
+	public function getProductsForShop($category,$inputs,$limit,$offset)
     {
-        return $this->buildQuery($category,$inputs,$limit,$offset);
+
+
+		$products = $this->buildQuery($category,$inputs,$limit,$offset);
+
+
+		//$images = $this->getImagesForProducts($products);
+
+
+    	return $products;
     }
 
     public function getTotalRecordsForPagination($category,$inputs)
@@ -14,9 +32,8 @@ class ProductsModel extends MY_Model {
         return count($this->buildQuery($category,$inputs));
     }
 
-
     public function buildQuery($category,$inputs,$limit=null,$offset = 0){
-    	
+
         $this->db->select('products.*');
 
         $this->db->from($this->_table);
@@ -55,6 +72,7 @@ class ProductsModel extends MY_Model {
         if($limit){
             $this->db->limit($limit,$offset);
         }
+
 
         return $this->db->get()->result();
     }

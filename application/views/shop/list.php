@@ -99,6 +99,7 @@
                         <?php $this->load->view('partials/flash'); ?>
                         <?php
                         $product_count = 1;
+
                         foreach ($products as $product) : ?>
 						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
 							<!-- Block2 -->

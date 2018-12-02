@@ -59,8 +59,16 @@ class ShopController extends CI_Controller {
 
         //Get Categories
         $data['categories'] = $this->CategoriesModel->get_all();
+        //
+
         $data['total_rows'] = $pagination_config['total_rows'];
-        $data['products'] = $this->ProductsModel->getProductsForShop($category_id,$inputs,$limit,$offset);
+		$products = $this->ProductsModel->getProductsForShop($category_id,$inputs,$limit,$offset);
+
+		//Get Product Images :
+		//$this->ProductImagesModel->getImageLookupProducts($products);
+
+
+		$data['products'] = $products;
 
        $this->load->template('shop/list',$data);
 	}

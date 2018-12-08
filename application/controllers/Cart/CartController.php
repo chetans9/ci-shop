@@ -24,7 +24,7 @@ class CartController extends CI_Controller {
             $qty = $this->input->post('qty');
         }
         $product_display_img ="";
-        $image = $this->ProductImagesModel->getFirstImageByProductId($product->id);
+        $image = $product->cover_image;
 	    if($image){
             $product_display_img = $image->path;
         }

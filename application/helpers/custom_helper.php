@@ -30,3 +30,19 @@ if ( ! function_exists('thumbImage'))
 
     }
 }
+
+if ( ! function_exists('upload_path'))
+{
+	function upload_path($path=null){
+
+
+		return base_url('uploads/'.$path);
+	}
+}
+
+if ( ! function_exists('product_cover'))
+{
+	function product_cover($product){
+		return base_url('/uploads');
+	}
+}

@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminProductsController extends CI_Controller {
 
     protected $uploaded_images = array();
+    protected $cover_image;
 
     /**
      * AdminProductsController constructor.
@@ -15,6 +16,8 @@ class AdminProductsController extends CI_Controller {
             redirect(base_url('index.php/login'));
             exit;
         }
+
+
 
         $this->load->model('ProductsModel');
         $this->load->model('ProductImagesModel');
@@ -116,14 +119,26 @@ class AdminProductsController extends CI_Controller {
                 return false;
             }
 
-            array_push($this->uploaded_images,$this->upload->data());
-
-
         }
 
         $this->createUploadedImageThumbs();
         return true;
     }
+
+
+    public function uploadCover()
+	{
+		$upload_config = $this->getUploadConfig();
+
+		$this->load->library('upload', $upload_config);
+
+		if(!$this->upload->do_upload('cover_image')){
+			$this->form_validation->set_message('cover_image', $this->upload->display_errors());
+			return false;
+		}
+		$this->cover_image = $this->upload->data();
+		return $this->cover_image;
+	}
 
     /**
      * Create New Resource
@@ -145,9 +160,17 @@ class AdminProductsController extends CI_Controller {
             {
                 //Form validation success. Insert Record into database
                 $inputs['created_at'] = date('Y-m-d H:i:s');
+
+				$cover_image = $this->uploadCover();
+
+				$inputs['cover_image'] = $cover_image['file_name'];
                 $last_id = $this->ProductsModel->insert($inputs);
 
                 $images_path = array();
+
+				$allowed_mime_types = array("image/jpeg","image/png","image/jpg");
+
+
 
 
                 foreach ($this->uploaded_images as $uploaded_image)
@@ -243,6 +266,7 @@ class AdminProductsController extends CI_Controller {
             $this->load->library('image_lib', $config);
             $this->image_lib->resize();
         }
+
         return true;
     }
 }

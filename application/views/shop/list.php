@@ -106,7 +106,7 @@
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
 
-                                    <img src="<?php echo upload_path('images/'.thumbImage($product->cover_image)) ?>" alt="IMG-PRODUCT">
+                                    <img src="<?php echo product_images($product->cover_image) ?>" alt="IMG-PRODUCT">
 
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4" data-product-id="<?php echo $product->id ?>">

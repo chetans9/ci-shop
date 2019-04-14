@@ -67,6 +67,8 @@
 <section class="banner bgwhite p-t-40 p-b-40">
     <div class="container">
         <div class="row">
+
+			<?php foreach ($categories as $category) : ?>
             <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
                 <!-- block1 -->
                 <div class="block1 hov-img-zoom pos-relative m-b-30">
@@ -154,6 +156,7 @@
                     </div>
                 </div>
             </div>
+			<?php endforeach ?>
         </div>
     </div>
 </section>

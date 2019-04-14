@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdminCategoriesController extends CI_Controller {
+class AdminCategoriesController extends MY_Controller {
     /**
      * AdminCategoriesController constructor.
      */
@@ -48,7 +48,13 @@ class AdminCategoriesController extends CI_Controller {
             {
 
                 //Form validation success. Insert Record into database
+
+				$upload_data = $this->uploadFile('cover_image',$this->getUploadConfig());
+
+				$inputs['cover_image'] = $upload_data['file_name'];
                 $last_id = $this->CategoriesModel->insert($inputs);
+
+
                 $this->session->set_flashdata('success', 'Category Created successfully');
 
                 redirect(base_url('index.php/admin/categories'));
@@ -109,4 +115,13 @@ class AdminCategoriesController extends CI_Controller {
         }
 
     }
+
+    public function getUploadConfig(){
+		$config = array();
+		$config['upload_path'] = 'images/categories';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['max_size'] = 10000000;
+
+		return $config;
+	}
 }

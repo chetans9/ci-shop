@@ -16,7 +16,6 @@ if (!function_exists('thumbImage')) {
 		if (!file_exists($path)) {
 			return $path;
 		}
-
 		$path_info = pathinfo($path);
 
 		$thumb_path = $path_info['dirname'] . '/' . $path_info['filename'] . '_thumb.' . $path_info['extension'];

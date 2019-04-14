@@ -20,7 +20,7 @@
                     <div class="box-header">
 
                     </div>
-                    <?php echo form_open(base_url('index.php/admin/categories/edit/'.$this->uri->segment(4))) ?>
+                    <?php echo form_open_multipart(base_url('index.php/admin/categories/edit/'.$this->uri->segment(4))) ?>
 
                     <div class="box-body">
                         <?php $this->load->view('admin/categories/form'); ?>

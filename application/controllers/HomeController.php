@@ -8,6 +8,7 @@ class HomeController extends CI_Controller {
         parent::__construct();
 
         $this->load->model('ProductsModel');
+        $this->load->model('CategoriesModel');
 
 
     }
@@ -19,8 +20,8 @@ class HomeController extends CI_Controller {
      */
 	public function index()
 	{
-
-       $this->load->template('home');
+		$data['categories'] = $this->CategoriesModel->get_all();
+		$this->load->template('home',$data);
 	}
 
 

@@ -16,16 +16,22 @@ class MY_Controller extends CI_Controller
 	 */
 	public function uploadFile($name_field,$config = array())
 	{
-		$upload_config = $this->getUploadConfig();
+		if(empty($config)){
+			$config = array();
+			$config['upload_path'] = 'images/products';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['max_size'] = 10000000;
+		}
 
-		$this->load->library('upload', $upload_config);
+
+		$this->load->library('upload', $config);
 
 		if(!$this->upload->do_upload($name_field)){
-			$this->form_validation->set_message('cover_image', $this->upload->display_errors());
+			$this->form_validation->set_message($name_field, $this->upload->display_errors());
 			return false;
 		}
-		$this->cover_image = $this->upload->data();
-		return $this->cover_image;
+
+		return $this->upload->data();
 	}
 
 

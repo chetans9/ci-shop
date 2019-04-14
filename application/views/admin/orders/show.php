@@ -27,24 +27,24 @@
                             <tbody>
                             <tr>
                                 <th>Id</th>
-                                <td><?php echo $record->id ?></td>
+                                <td><?php echo xss_clean($record->id) ?></td>
                             </tr>
                             <tr>
                                 <th>User</th>
-                                <td><?php echo $record->user_name ?></td>
+                                <td><?php echo xss_clean($record->user_name) ?></td>
                             </tr>
 
                             <tr>
                                 <th>Email</th>
-                                <td><?php echo $record->email ?></td>
+                                <td><?php echo xss_clean($record->email) ?></td>
                             </tr>
                             <tr>
                                 <th>Delivery Address</th>
-                                <td><?php echo $record->delivery_address ?></td>
+                                <td><?php echo xss_clean($record->delivery_address) ?></td>
                             </tr>
                             <tr>
                                 <th>Pincode</th>
-                                <td><?php echo $record->pincode ?></td>
+                                <td><?php echo xss_clean($record->pincode) ?></td>
                             </tr>
                             </tbody>
                         </table>

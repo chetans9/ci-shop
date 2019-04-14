@@ -13,6 +13,7 @@ class AdminOrdersController extends CI_Controller {
             exit;
         }
         $this->load->model('OrdersModel');
+		$this->load->helper("security");
 
     }
 
@@ -33,13 +34,8 @@ class AdminOrdersController extends CI_Controller {
      */
     public function show($id)
     {
-
-
-
-        $record = $this->OrdersModel->get($id);
+        $record = $this->OrdersModel->getOrder($id);
         $data['record'] = $record;
-
-
         $this->load->templateAdmin('admin/orders/show',$data);
     }
 

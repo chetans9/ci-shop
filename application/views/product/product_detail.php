@@ -29,12 +29,11 @@
 			<div class="w-size13 p-t-30 respon5">
 				<div class="wrap-slick3 flex-sb flex-w">
 					<div class="wrap-slick3-dots"></div>
-
 					<div class="slick3">
                         <?php foreach ($product_images as $product_image) :?>
-						<div class="item-slick3" data-thumb="<?php echo base_url($product_image->path); ?>">
+						<div class="item-slick3" data-thumb="<?php echo base_url('images/products/'.thumbImage($product_image->path)); ?>">
 							<div class="wrap-pic-w">
-								<img src="<?php echo base_url($product_image->path); ?>" alt="IMG-PRODUCT">
+								<img src="<?php echo  xss_clean(base_url('images/products/'.$product_image->path)); ?>" alt="IMG-PRODUCT">
 							</div>
 						</div>
                         <?php endforeach; ?>

@@ -2,7 +2,7 @@
 
 class ProductImagesModel extends MY_Model {
 
-    public $table = 'product_images';
+   protected $_table = 'product_images';
 
     /**
      *

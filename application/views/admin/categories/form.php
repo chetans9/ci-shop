@@ -15,4 +15,11 @@
         <?php echo form_dropdown('parent_id',array(''=>'Select')+$select_categories, (isset($record))? set_value("parent_id", $record->parent_id) : set_value("parent_id"), array('class' => 'form-control', 'placeholder' => '5000', 'id' => 'price')); ?>
         <?php echo form_error('price', '<span class="help-block">', '</span>') ?>
     </div>
+
+
+	<div class="form-group<?php echo (form_error('cover_image')) ? ' has-error' : ''; ?>">
+		<label for="cover_image">Cover Image *</label>
+		<input type="file" name="cover_image" class="form-control" id="cover_image"/>
+		<?php echo form_error('cover_image', '<span class="help-block">', '</span>') ?>
+	</div>
 </fieldset>

@@ -16,4 +16,6 @@ class CategoriesModel extends MY_Model {
         return $query->result_array();
     }
 
+
+
 }

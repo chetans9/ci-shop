@@ -33,7 +33,7 @@ class AdminProductsController extends MY_Controller
 	{
 		$this->load->library('pagination');
 		//Call user defined helper
-		$pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(), 20);
+		$pagination_config = getAdminPaginationConfig($this->ProductsModel->count_all(), 10);
 		$this->pagination->initialize($pagination_config);
 		$data['records'] = $this->ProductsModel->order_by('created_at', 'desc')->limit($pagination_config['per_page'], $this->input->get('per_page'))->get_all();
 		$this->load->templateAdmin('admin/products/list', $data);
@@ -48,7 +48,7 @@ class AdminProductsController extends MY_Controller
 		$this->form_validation->set_rules('description', 'Description', 'trim|required');
 		$this->form_validation->set_rules('category_id', 'category', 'trim|required');
 		$this->form_validation->set_rules('price', 'Description', 'trim|required|max_length[11]');
-		if (empty($_FILES['cover_image']['name'])) {
+		if (empty($_FILES['cover_image']['name']) && $type == 'add') {
 			$this->form_validation->set_rules('cover_image', 'cover image', 'required');
 		}
 	}
@@ -89,26 +89,30 @@ class AdminProductsController extends MY_Controller
 
 				//Upload single file. i.e Product Cover image.
 				$cover_image = $this->uploadFile('cover_image', $this->getUploadConfig());
-
+				//Create Product thumbnail
 				$this->createThumb($cover_image);
 				//Save uploaded file name in column.
 				$inputs['cover_image'] = $cover_image['file_name'];
 
+
+//				$images_path = array();
+//				$allowed_mime_types = array("image/jpeg", "image/png", "image/jpg");
+//
+//				print_r($_FILES); die();
+//				$this->upload->do_upload('images');
+
 				//Insert form data into database
 				$last_id = $this->ProductsModel->insert($inputs);
 
-				$images_path = array();
-				$allowed_mime_types = array("image/jpeg", "image/png", "image/jpg");
 
 
-				$this->upload->do_upload('images');
 //
 //				if(!$this->upload->do_upload('images')){
 //					//$this->form_validation->set_message('uploadFiles', $this->upload->display_errors());
 //					return false;
 //				}
 
-
+				var_dump($this->uploaded_images); die();
 				foreach ($this->uploaded_images as $uploaded_image) {
 					$images_path['path'] =  $uploaded_image['file_name'];
 					$images_path['product_id'] = $last_id;
@@ -135,10 +139,10 @@ class AdminProductsController extends MY_Controller
 	{
 
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
-			$this->setValidationRules();
+			$this->setValidationRules('edit');
 			//Set one additional rule for files in edit section
 			if (!empty($_FILES['images']['name']) && $_FILES['images']['name'][0] != null) {
-				$this->form_validation->set_rules('images[]', 'Images', 'callback_validateFiles');
+				$this->form_validation->set_rules('images[]', 'Images', 'callback_validateAndUploadFiles');
 			}
 
 			if ($this->form_validation->run()) {
@@ -147,9 +151,11 @@ class AdminProductsController extends MY_Controller
 				$inputs['updated_at'] = date('Y-m-d H:i:s');
 				$this->ProductsModel->update($id, $inputs);
 				$this->session->set_flashdata('success', 'Product Updated successfully');
+				$upload_dir = 'images/products';
+
 
 				foreach ($this->uploaded_images as $uploaded_image) {
-					$images_path['path'] = 'images/products/' . $uploaded_image['file_name'];
+					$images_path['path'] = $uploaded_image['file_name'];
 					$images_path['product_id'] = $id;
 					$this->ProductImagesModel->insert($images_path);
 				}
@@ -229,10 +235,11 @@ class AdminProductsController extends MY_Controller
 				return false;
 			}
 		}
-		$upload_data_arr = array();
-		array_push($upload_data_arr,$this->upload->data());
 
-		foreach ($upload_data_arr as $upload_data){
+		$upload_data_arr = array();
+		array_push($this->uploaded_images,$this->upload->data());
+
+		foreach ($this->uploaded_images as $upload_data){
 			$this->createThumb($upload_data);
 		}
 		return true;

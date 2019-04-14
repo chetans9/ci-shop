@@ -2,17 +2,21 @@
 
 class OrdersModel extends MY_Model {
     public $_table = 'orders';
+	public $belongs_to = array( 'user' );
 
-//    public function get($id){
-//        //$this->select("8")
-//        $this->db->select("$this->_table.*");
-//        $this->db->select("users.name as user_name, users.email");
-//        $this->db->join('users',"users.id = $this->table.user_id","inner");
-//        $this->db->from($this->table);
-//        $result = $this->db->get()->row();
-//
-//        return $result;
-//    }
+
+    public function getOrder($id){
+
+        $this->db->select("$this->_table.*");
+        $this->db->select("users.name as user_name, users.email");
+        $this->db->join('users',"users.id = $this->_table.user_id","inner");
+        $this->db->from($this->_table);
+
+        $this->db->where("orders.id",$id);
+        $result = $this->db->get();
+
+        return $result->row();
+    }
 
     public function countNew(){
         $this->db->select("$this->_table.id");

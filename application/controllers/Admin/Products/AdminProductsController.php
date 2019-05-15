@@ -112,7 +112,6 @@ class AdminProductsController extends MY_Controller
 //					return false;
 //				}
 
-				var_dump($this->uploaded_images); die();
 				foreach ($this->uploaded_images as $uploaded_image) {
 					$images_path['path'] =  $uploaded_image['file_name'];
 					$images_path['product_id'] = $last_id;
@@ -180,7 +179,17 @@ class AdminProductsController extends MY_Controller
 	public function delete($id)
 	{
 		if ($this->input->server('REQUEST_METHOD') == 'POST') {
+			//delete files from storage ..
+
+			$images = $this->ProductImagesModel->getByProductId($id);
+
+			foreach ($images as $image){
+				unlink('images/products/'.$image->path);
+				unlink('images/products/'.thumbImage($image->path));
+			}
 			$this->ProductsModel->delete($id);
+
+
 			$this->session->set_flashdata('info', 'Product deleted successfully.');
 			redirect(base_url('index.php/admin/products'));
 			exit;

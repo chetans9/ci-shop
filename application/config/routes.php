@@ -110,3 +110,7 @@ $route['admin/categories/delete/(:num)'] = 'Admin/Categories/AdminCategoriesCont
 $route['admin/orders'] = 'Admin/Orders/AdminOrdersController/index';
 $route['admin/orders/show/(:num)'] = 'Admin/Orders/AdminOrdersController/show/$1';
 $route['admin/orders/delete/(:num)'] = 'Admin/Orders/AdminOrdersController/delete/$1';
+
+$route['admin/slider'] = 'Admin/Slider/AdminSliderController/index';
+$route['admin/slider/create'] = 'Admin/Slider/AdminSliderController/create';
+$route['admin/slider/delete(:num)'] = 'Admin/Slider/AdminSliderController/delete/$1';

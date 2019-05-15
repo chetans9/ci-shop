@@ -128,6 +128,12 @@
                         <i class="fa fa-first-order"></i> <span>Orders</span>
                     </a>
                 </li>
+
+				<li class="<?php echo ($this->uri->segment(2) == "orders")? " active": ""; ?>">
+					<a href="<?php echo base_url('index.php/admin/slider') ?>">
+						<i class="fa fa-image"></i> <span>Slider</span>
+					</a>
+				</li>
             </ul>
         </section>
         <!-- /.sidebar -->

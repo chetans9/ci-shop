@@ -74,8 +74,12 @@
                         <li>
                             <a href="<?php echo base_url('index.php/shop') ?>">Shop</a>
                         </li>
+
+						<li>
+							<a href="<?php echo base_url('index.php/contact-us') ?>">Contact Us</a>
+						</li>
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="<?php echo base_url('index.php/about') ?>"">About</a>
                         </li>
                     </ul>
                 </nav>

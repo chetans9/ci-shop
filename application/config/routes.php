@@ -86,6 +86,9 @@ $route['profile/my-orders'] = 'Profile/ProfileController/myOrders';
 $route['profile/my-wishlist'] = 'Profile/ProfileController/myWishList';
 $route['add-to-wishlist'] = 'WishList/WishListController/addToWishList';
 
+//================Contact Us ==============//
+$route['contact-us'] = 'ContactUs/ContactUsController/index';
+
 
 
 /*

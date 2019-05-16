@@ -113,4 +113,4 @@ $route['admin/orders/delete/(:num)'] = 'Admin/Orders/AdminOrdersController/delet
 
 $route['admin/slider'] = 'Admin/Slider/AdminSliderController/index';
 $route['admin/slider/create'] = 'Admin/Slider/AdminSliderController/create';
-$route['admin/slider/delete(:num)'] = 'Admin/Slider/AdminSliderController/delete/$1';
+$route['admin/slider/delete/(:num)'] = 'Admin/Slider/AdminSliderController/delete/$1';

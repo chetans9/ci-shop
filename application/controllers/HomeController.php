@@ -9,6 +9,7 @@ class HomeController extends CI_Controller {
 
         $this->load->model('ProductsModel');
         $this->load->model('CategoriesModel');
+		$this->load->model('SliderImagesModel');
 
 
     }
@@ -21,6 +22,11 @@ class HomeController extends CI_Controller {
 	public function index()
 	{
 		$data['categories'] = $this->CategoriesModel->get_all();
+		$data['slider_images'] = $this->SliderImagesModel->get_all();
+
+//		print_r($data['slider_images']); die();
+
+
 		$this->load->template('home',$data);
 	}
 

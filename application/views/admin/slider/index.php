@@ -45,7 +45,6 @@
 										<img src="<?php echo base_url('images/slider/'.$slider_image->path) ?>" height="150">
 									</td>
                                     <td>
-                                        <a href="<?php echo base_url('index.php/admin/'.$this->uri->segment(2).'/show/'.$slider_image->id) ?>" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
                                         <button data-toggle="modal" data-target = "#delete-modal<?php echo $slider_image->id ;?>" class="btn btn-danger btn-sm delete_record"><span class="glyphicon glyphicon-trash"></span></button>
                                     </td>
                                 </tr>

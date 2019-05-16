@@ -57,12 +57,19 @@ class AdminSliderController extends MY_Controller {
 
     public function delete($id)
     {
-    	die('awfaf');
         if($this->input->server('REQUEST_METHOD')=='POST')
         {
+			$image = $this->SliderImagesModel->get($id);
+			//die('images/slider/'.$image->path);
+
+			unlink('images/slider/'.$image->path);
+
             $status = $this->SliderImagesModel->delete($id);
+
+
+
             if($status){
-                $this->session->set_flashdata('info', 'Order deleted successfully.');
+                $this->session->set_flashdata('info', 'Image deleted successfully.');
             }
             else{
                 $this->session->set_flashdata('error', 'Failed to delete Order.');

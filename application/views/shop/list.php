@@ -15,7 +15,6 @@
 	<!-- Content page -->
 	<section class="bgwhite p-t-55 p-b-65">
 		<div class="container">
-            <?php echo form_open('',array('method'=>'GET','id'=>'filters_form'))?>
 			<div class="row">
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
 
@@ -46,7 +45,7 @@
 						<h4 class="m-text14 p-b-32">
 							Filters
 						</h4>
-
+						<?php echo form_open('',array('method'=>'GET','id'=>'filters_form'))?>
 						<div class="filter-price p-t-22 p-b-50 bo3">
 							<div class="m-text15 p-b-17">
 								Price
@@ -79,6 +78,7 @@
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
 						</div>
+						<?php echo  form_close() ?>
 					</div>
 
 				</div>
@@ -116,7 +116,9 @@
 
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 											<!-- Button -->
-                                            <?php echo form_open(base_url('index.php/add-to-cart')) ?>
+                                            <?php echo form_open(base_url('index.php/add-to-cart')); ?>
+
+
 											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
 												Add to Cart
 											</button>
@@ -140,13 +142,14 @@
                         <?php endif; ?>
                         <?php
                             $product_count ++;
+
+
                         endforeach; ?>
 					</div>
                     <?php echo $this->pagination->create_links(); ?>
 				</div>
 
 			</div>
-            <?php echo form_close(); ?>
 		</div>
 	</section>
 

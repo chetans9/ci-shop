@@ -34,7 +34,7 @@
                             <?php foreach ($categories as $category) :?>
 							<li class="p-t-4">
 								<a href="<?php echo base_url('index.php/shop/'.$category->id) ?>" class="s-text13 <?php echo ($this->uri->segment(2) == $category->id) ? 'active1':''; ?>">
-									<?php echo $category->name ?>
+									<?php echo xss_clean($category->name) ?>
 								</a>
 							</li>
                             <?php endforeach; ?>
@@ -129,7 +129,7 @@
 								</div>
 								<div class="block2-txt p-t-20">
 									<a href="<?php echo base_url("index.php/product/$product->id"); ?>" class="block2-name dis-block s-text3 p-b-5">
-										<?php echo $product->name; ?>
+										<?php echo xss_clean($product->name); ?>
 									</a>
 									<span class="block2-price m-text6 p-r-5">
 										Rs <?php echo number_format($product->price); ?>

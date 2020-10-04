@@ -25,8 +25,9 @@ class CartController extends CI_Controller {
         }
         $product_display_img ="";
         $image = $product->cover_image;
+        
 	    if($image){
-            $product_display_img = $image->path;
+            $product_display_img = $image;
         }
         $data = array(
             'id'      => $product->id,

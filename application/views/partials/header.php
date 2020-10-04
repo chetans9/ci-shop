@@ -103,7 +103,10 @@
                             <?php foreach ($this->cart->contents() as $header_cart) : ?>
                             <li class="header-cart-item">
                                 <div class="header-cart-item-img">
-                                    <img src="<?php echo (isset($header_cart['options']['product_image'])) ? base_url() .thumbImage($header_cart['options']['product_image']): "";  ?>" alt="IMG">
+
+
+                                    <img src="<?php echo (isset($header_cart['options']['product_image'])) ? product_images($header_cart['options']['product_image']) : "";  ?>" alt="IMG">
+<!--									--><?php //print_r($header_cart); exit(); ?>
                                 </div>
 
                                 <div class="header-cart-item-txt">

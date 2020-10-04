@@ -32,7 +32,7 @@
 						<tr class="table-row">
 							<td class="column-1"">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="<?php echo (isset($item['options']['product_image'])) ? base_url() .thumbImage($item['options']['product_image']) : "";  ?>" alt="IMG-PRODUCT">
+									<img src="<?php echo (isset($item['options']['product_image'])) ? product_images($item['options']['product_image']) : "";  ?>" alt="IMG-PRODUCT">
 								</div>
 							</td>
 							<td class="column-2"><?php echo $item['name']; ?></td>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class LoginController extends CI_Controller {
+class UserLoginController extends CI_Controller {
     /**
      * LoginController constructor.
      */
@@ -9,7 +9,7 @@ class LoginController extends CI_Controller {
     {
         parent::__construct();
         if($this->session->logged_in){
-            redirect(base_url('index.php/admin'));
+            redirect(base_url('index.php'));
         }
         $this->load->model('UsersModel');
     }
@@ -47,7 +47,7 @@ class LoginController extends CI_Controller {
                         redirect($redirect_url);
                     }
                     else{
-                        redirect(base_url('index.php/admin'));
+                        redirect(base_url('index.php'));
                     }
 
                 }
@@ -60,48 +60,10 @@ class LoginController extends CI_Controller {
                 }
             }
         }
-        $this->load->view("auth/login");
+
+		$this->load->template('auth/user_login');
+        //$this->load->view("auth/login");
     }
-
-	/**
-	 *
-	 */
-	public function showLoginFormForUsers()
-	{
-		if($this->input->server('REQUEST_METHOD') == 'POST'){
-			//Set Validation rules
-			$this->setValidationRules();
-			if($this->form_validation->run())
-			{
-				$email = $this->input->post('email');
-				//Encrypt password using MD5
-				$password = md5($this->input->post('password'));
-				$user = $this->UsersModel->attemptLogin($email,$password);
-				if($user){
-					//Set user session
-					$this->setUserSession($user);
-
-					//If user attempted to access session protected page.
-					$redirect_url = $this->session->userdata('redirect_to');
-					if($redirect_url){
-						redirect($redirect_url);
-					}
-					else{
-						redirect(base_url('index.php/admin'));
-					}
-
-				}
-				else{
-					//Invalid credentials.
-					$this->session->set_flashdata('error', 'Email or password incorrect');
-					//Redirect back
-					redirect($_SERVER['HTTP_REFERER']);
-					exit;
-				}
-			}
-		}
-		$this->load->view("auth/user_login");
-	}
 
     /**
      * Set Users Login session

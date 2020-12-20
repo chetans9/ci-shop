@@ -11,7 +11,7 @@ class CheckoutController extends CI_Controller {
         if(!$this->session->userdata('logged_in'))
         {
             $this->session->set_userdata('redirect_to',base_url('index.php/'.uri_string()));
-            redirect(base_url('index.php/login'));
+            redirect(base_url('index.php/user-login'));
         }
     }
     /**

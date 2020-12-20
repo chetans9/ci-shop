@@ -38,8 +38,26 @@ class CartController extends CI_Controller {
         );
 
         $status = $this->cart->insert($data);
+
+
+
         if($status)
         {
+			if ($this->input->is_ajax_request()) {
+
+				$response = array(
+					'count' => $this->cart->total_items(),
+					'data' => $this->cart->contents(),
+					'total' => $this->cart->total()
+				);
+
+				return $this->output
+					->set_content_type('application/json')
+					->set_status_header(201)
+					->set_output(json_encode($response));
+			}
+
+
             $this->session->set_flashdata('success', 'Product added to cart successfully');
         }
         else{

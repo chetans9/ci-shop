@@ -8,10 +8,11 @@ class ProfileController extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if(!$this->session->logged_in){
-            redirect(base_url('index.php/login'));
-            exit;
-        }
+		if(!$this->session->userdata('logged_in'))
+		{
+			$this->session->set_userdata('redirect_to',base_url('index.php/'.uri_string()));
+			redirect(base_url('index.php/user-login'));
+		}
     }
 
     /**
